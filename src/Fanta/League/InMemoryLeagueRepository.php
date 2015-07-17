@@ -14,4 +14,24 @@ class InMemoryLeagueRepository implements LeagueRepository
         $this->repo[] = $league;
         return $league;
     }
+
+    /**
+     * @param string $name
+     * @return League
+     */
+    public function findByName($name)
+    {
+        // TODO: Implement findByName() method.
+    }
+
+    /**
+     * @param League $league
+     * @return League
+     */
+    public function remove(League $league)
+    {
+        // TODO: Implement removeLeague() method.
+    }
+
+
 }

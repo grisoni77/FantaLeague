@@ -11,6 +11,8 @@ use Behat\Gherkin\Node\TableNode;
  */
 class FeatureContext implements Context, SnippetAcceptingContext
 {
+    use TeamFeatureContext;
+
     /**
      * Initializes context.
      *
@@ -20,7 +22,10 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function __construct()
     {
-        $this->leagues = new Fanta\League\LeagueRepository();
+        //$this->useContext('team_context', new TeamFeatureContext());
+
+        $this->leagueFactory = new \Fanta\League\LeagueFactory();
+        $this->leagues = new Fanta\League\InMemoryLeagueRepository();
     }
 
     /**
@@ -30,7 +35,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
     {
         $league = $this->leagues->findByName($arg1);
         if ($league) {
-            $this->leagues->removeLeague($league);
+            $league = $this->leagues->remove($league);
         }
     }
 
@@ -39,7 +44,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
      */
     public function iCreateALeague($arg1)
     {
-        $this->leagues->createLeague()->setName($arg1);
+        $this->leagueFactory->create()->setName($arg1);
     }
 
 
@@ -50,7 +55,8 @@ class FeatureContext implements Context, SnippetAcceptingContext
     {
         $league = $this->leagues->findByName($arg1);
         if (!$league) {
-            $this->leagues->createLeague()->setName($arg1);
+            $league = $this->leagueFactory->create()->setName($arg1);
+            $this->leagues->add($league);
         }
     }
 }
