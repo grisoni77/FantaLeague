@@ -1,0 +1,25 @@
+{
+    "name": "root/bddtut",
+    "authors": [
+        {
+            "name": "Cris",
+            "email": "cristiano.cucco@gmail.com"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "behat/behat": "~3.0",
+        "phpspec/phpspec": "~2.0"
+    },
+    "config": {
+      "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": {
+          "Fanta": "src/"
+        },
+        "psr-4": {
+            "Fanta\\": "src"
+        }
+    }
+}
